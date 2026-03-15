@@ -1,5 +1,7 @@
 package game.core;
 
+import game.input.Keyboard;
+import game.input.Mouse;
 import org.lwjgl.glfw.GLFWVidMode;
 
 import static game.core.GlobalConsts.HEIGHT;
@@ -13,6 +15,7 @@ public class Window {
     int width = (int) WIDTH, height = (int) HEIGHT;
     int xPos, yPos;
 
+    @SuppressWarnings("resource")
     public Window(String title) {
         if (!glfwInit()) throw new IllegalStateException("Failed to initialize GLFW");
 
@@ -21,6 +24,9 @@ public class Window {
 
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
         window = glfwCreateWindow(width, height, title, 0, 0);
+
+        glfwSetKeyCallback(window, Keyboard::keyCallback);
+        Mouse.setWindow(window);
 
         assert mode != null;
         xPos = (mode.width() - width) / 2;

@@ -1,5 +1,7 @@
 package game.core;
 
+import game.input.Keyboard;
+import game.input.Mouse;
 import game.render.Texture;
 
 import static game.core.GlobalConsts.FPS;
@@ -16,6 +18,10 @@ public class Game {
 
         while (!window.shouldClose()) {
             double startTime = time();
+
+            Keyboard.update();
+            Mouse.update();
+
             double endTime = time();
 
             double elapsed = endTime - startTime;
