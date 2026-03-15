@@ -5,6 +5,7 @@ import org.lwjgl.glfw.GLFWVidMode;
 import static game.core.GlobalConsts.HEIGHT;
 import static game.core.GlobalConsts.WIDTH;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL.createCapabilities;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Window {
@@ -25,6 +26,27 @@ public class Window {
         xPos = (mode.width() - width) / 2;
         yPos = (mode.height() - height) / 2;
         glfwSetWindowPos(window, xPos, yPos);
+
+        glfwMakeContextCurrent(window);
+        createCapabilities();
+        glfwSwapInterval(1);
+
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0, width, height, 0, -1, 1);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+        glClearColor(0f, 0f, 0f, 1f);
+    }
+
+    public void update() {
+        glfwPollEvents();
+        glfwSwapBuffers(window);
     }
 
     public void clear() {

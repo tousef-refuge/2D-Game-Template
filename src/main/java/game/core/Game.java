@@ -5,6 +5,7 @@ public class Game {
         Window window = new Window(title);
 
         while (!window.shouldClose()) {
+            window.update();
             window.clear();
         }
         window.destroy();
