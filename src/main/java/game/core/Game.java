@@ -1,5 +1,6 @@
 package game.core;
 
+import game.audio.AudioEngine;
 import game.input.Keyboard;
 import game.input.Mouse;
 import game.render.Texture;
@@ -14,6 +15,7 @@ public class Game {
     public Game(String title) {
         window = new Window(title);
 
+        AudioEngine.init();
         Texture.init();
 
         while (!window.shouldClose()) {
@@ -33,7 +35,9 @@ public class Game {
 
             window.update();
             window.clear();
+            AudioEngine.update();
         }
+        AudioEngine.cleanup();
         Texture.cleanupAll();
         window.destroy();
     }
