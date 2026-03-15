@@ -1,5 +1,7 @@
 package game.core;
 
+import game.render.Texture;
+
 import static game.core.GlobalConsts.FPS;
 
 public class Game {
@@ -9,6 +11,8 @@ public class Game {
     @SuppressWarnings("BusyWait")
     public Game(String title) {
         window = new Window(title);
+
+        Texture.init();
 
         while (!window.shouldClose()) {
             double startTime = time();
@@ -24,6 +28,7 @@ public class Game {
             window.update();
             window.clear();
         }
+        Texture.cleanupAll();
         window.destroy();
     }
 
