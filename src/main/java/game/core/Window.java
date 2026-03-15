@@ -5,6 +5,7 @@ import org.lwjgl.glfw.GLFWVidMode;
 import static game.core.GlobalConsts.HEIGHT;
 import static game.core.GlobalConsts.WIDTH;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
 
 public class Window {
     long window;
@@ -24,5 +25,18 @@ public class Window {
         xPos = (mode.width() - width) / 2;
         yPos = (mode.height() - height) / 2;
         glfwSetWindowPos(window, xPos, yPos);
+    }
+
+    public void clear() {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+
+    public boolean shouldClose() {
+        return glfwWindowShouldClose(window);
+    }
+
+    public void destroy() {
+        glfwDestroyWindow(window);
+        glfwTerminate();
     }
 }

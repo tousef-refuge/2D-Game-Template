@@ -1,7 +1,9 @@
 package game;
 
+import game.core.Game;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("yo is this thing on");
+        new Game("2D Game Template");
     }
 }
