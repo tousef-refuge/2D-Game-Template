@@ -75,8 +75,16 @@ def textureManifest = ManifestTask(
         [".png"]
 )
 
+def sfxManifest = ManifestTask(
+        "sfxManifest",
+        "audio/sfx",
+        "sfx.manifest",
+        [".wav"]
+)
+
 tasks.named("processResources") {
     dependsOn textureManifest
+    dependsOn sfxManifest
 }
 
 tasks.jar {
