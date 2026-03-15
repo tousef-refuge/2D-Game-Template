@@ -1,3 +1,5 @@
+import java.nio.file.Files
+
 plugins {
     id 'java'
     id 'application'
@@ -33,6 +35,48 @@ dependencies {
     implementation "org.lwjgl:lwjgl-stb::$lwjglNatives"
 
     implementation 'com.google.code.gson:gson:2.11.0'
+}
+
+def ManifestTask(String taskName, String subStart, String subOutput, List<String> exts) {
+    def startDir = file("src/main/resources/" + subStart)
+    def outputFile = file("src/main/resources/" + subOutput)
+
+    def task = tasks.register(taskName) {
+        inputs.dir(startDir)
+        outputs.file(outputFile)
+
+        doLast {
+            def lines = []
+            Files.walk(startDir.toPath())
+                    .filter {
+                        def name = it.fileName.toString().toLowerCase()
+                        Files.isRegularFile(it) && exts.any {ext -> name.endsWith(ext)}
+                    }
+                    .forEach {
+                        lines.add(
+                                startDir.toPath()
+                                        .relativize(it)
+                                        .toString()
+                                        .replace("\\", "/")
+                        )
+                    }
+
+            outputFile.text = lines.join("\n")
+        }
+    }
+
+    return task
+}
+
+def textureManifest = ManifestTask(
+        "textureManifest",
+        "textures",
+        "textures.manifest",
+        [".png"]
+)
+
+tasks.named("processResources") {
+    dependsOn textureManifest
 }
 
 tasks.jar {

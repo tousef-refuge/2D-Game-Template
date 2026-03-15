@@ -37,3 +37,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Game Runtime Data ###
+gamedata/
+*.manifest
