@@ -15,6 +15,9 @@ public class Window {
     int width = (int) WIDTH, height = (int) HEIGHT;
     int xPos, yPos;
 
+    //the battle people curse
+    boolean fullscreen = false;
+
     @SuppressWarnings("resource")
     public Window(String title) {
         if (!glfwInit()) throw new IllegalStateException("Failed to initialize GLFW");
@@ -49,6 +52,8 @@ public class Window {
 
         glClearColor(0f, 0f, 0f, 1f);
     }
+
+    public void toggleFullscreen() {}
 
     public void update() {
         glfwPollEvents();
