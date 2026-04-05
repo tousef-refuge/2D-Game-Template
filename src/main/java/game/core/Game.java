@@ -31,10 +31,6 @@ public class Game {
             }
 
             double startTime = time();
-
-            Keyboard.update();
-            Mouse.update();
-
             double currentTime = time();
             double dt = currentTime - prevTime;
             prevTime = currentTime;
@@ -50,6 +46,8 @@ public class Game {
                 } catch (InterruptedException ignored) {}
             }
 
+            Keyboard.update();
+            Mouse.update();
             window.update();
             if (Keyboard.isTapped(GLFW_KEY_F11)) window.toggleFullscreen();
 
