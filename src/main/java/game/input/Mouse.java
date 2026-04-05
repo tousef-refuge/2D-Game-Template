@@ -37,11 +37,28 @@ public class Mouse {
             IntBuffer fbHeight = stack.mallocInt(1);
             glfwGetFramebufferSize(window, fbWidth, fbHeight);
 
-            double scaleX = WIDTH  / (double) fbWidth.get(0);
-            double scaleY = HEIGHT / (double) fbHeight.get(0);
+            int fbW = fbWidth.get(0);
+            int fbH = fbHeight.get(0);
 
-            x = mouseX * scaleX;
-            y = mouseY * scaleY;
+            float scaleX = fbW / WIDTH;
+            float scaleY = fbH / HEIGHT;
+            float scale = Math.min(scaleX, scaleY);
+
+            int vpWidth  = (int)(WIDTH * scale);
+            int vpHeight = (int)(HEIGHT * scale);
+
+            int vpX = (fbW - vpWidth) / 2;
+            int vpY = (fbH - vpHeight) / 2;
+
+            double localX = mouseX - vpX;
+            double localY = mouseY - vpY;
+
+            double normX = localX / vpWidth;
+            double normY = localY / vpHeight;
+
+            //no HARAM out of bounds
+            x = Math.max(0, Math.min(WIDTH, normX * WIDTH));
+            y = Math.max(0, Math.min(HEIGHT, normY * HEIGHT));
         }
     }
 
