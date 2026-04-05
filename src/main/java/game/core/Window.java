@@ -46,14 +46,63 @@ public class Window {
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        glOrtho(0, width, height, 0, -1, 1);
+        glOrtho(0, WIDTH, HEIGHT, 0, -1, 1);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
         glClearColor(0f, 0f, 0f, 1f);
+        updateViewport();
     }
 
-    public void toggleFullscreen() {}
+    @SuppressWarnings("DataFlowIssue")
+    public void toggleFullscreen() {
+        fullscreen = !fullscreen;
+
+        long monitor = glfwGetPrimaryMonitor();
+        GLFWVidMode mode = glfwGetVideoMode(monitor);
+
+        if (fullscreen) {
+            int[] x = new int[1], y = new int[1];
+            int[] w =  new int[1], h = new int[1];
+            glfwGetWindowPos(window, x, y);
+            glfwGetWindowSize(window, w, h);
+
+            xPos = x[0]; yPos = y[0];
+            width = w[0]; height = h[0];
+
+            glfwSetWindowMonitor(window, monitor,
+                    0, 0,
+                    mode.width(), mode.height(),
+                    mode.refreshRate()
+            );
+        } else {
+            width = (int) WIDTH; height = (int) HEIGHT;
+            glfwSetWindowMonitor(window, 0,
+                    xPos, yPos,
+                    width, height,
+                    0);
+        }
+
+        updateViewport();
+    }
+
+    private void updateViewport() {
+        int[] w = new int[1], h = new int[1];
+        glfwGetFramebufferSize(window, w, h);
+        width = w[0]; height = h[0];
+
+        float scaleX = width / WIDTH;
+        float scaleY = height / HEIGHT;
+        float scale = Math.min(scaleX, scaleY);
+
+        int vpWidth = (int)(WIDTH * scale);
+        int vpHeight = (int)(HEIGHT * scale);
+
+        int vpX = (width - vpWidth) / 2;
+        int vpY = (height - vpHeight) / 2;
+
+        glViewport(vpX, vpY, vpWidth, vpHeight);
+    }
 
     public void update() {
         glfwPollEvents();
