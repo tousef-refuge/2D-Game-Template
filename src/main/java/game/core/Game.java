@@ -8,7 +8,6 @@ import game.scenes.core.SceneManager;
 import game.scenes.other.EmptyScene;
 
 import static game.core.GlobalConsts.FPS;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_F11;
 
 public class Game {
     Window window;
@@ -48,10 +47,10 @@ public class Game {
 
             Keyboard.update();
             Mouse.update();
-            window.update();
-            if (Keyboard.isTapped(GLFW_KEY_F11)) window.toggleFullscreen();
 
+            window.update();
             window.clear();
+
             AudioEngine.update();
         }
         AudioEngine.cleanup();
