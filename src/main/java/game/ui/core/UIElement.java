@@ -27,7 +27,7 @@ public abstract class UIElement {
     public void render() {
         float rx = getRenderX();
         float ry = getRenderY();
-        texture.render(rx, ry, width, height, 1f, "TOP_LEFT");
+        texture.render(rx, ry, width, height, 1f, align);
     }
 
     public boolean contains(double mx, double my) {
