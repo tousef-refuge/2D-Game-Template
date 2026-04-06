@@ -42,3 +42,8 @@ bin/
 gamedata/
 *.manifest
 .env
+
+### ONCE YOU EXTRACT THE REPO REMOVE EVERYTHING AFTER THIS IMMEDIATELY
+gradle/
+gradlew
+gradlew.bat
