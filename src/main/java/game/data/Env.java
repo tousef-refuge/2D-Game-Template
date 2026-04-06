@@ -6,7 +6,9 @@ public class Env {
     private static final Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
 
     public static String get(String key) {
-        return dotenv.get(key);
+        String val = dotenv.get(key);
+        if (val == null) throw new NullPointerException(key + " does not exist in .env");
+        return val;
     }
 
     public static String get(String key, String defaultValue) {
