@@ -1,4 +1,4 @@
-package game.core;
+package game.window;
 
 import game.input.Keyboard;
 import game.input.Mouse;
@@ -9,11 +9,11 @@ import static org.lwjgl.opengl.GL.createCapabilities;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Window {
-    long window;
-    int width, height;
+    private static long window;
+    public static int WIDTH, HEIGHT;
 
     @SuppressWarnings("resource")
-    public Window(String title) {
+    public static void init(String title) {
         if (!glfwInit()) throw new IllegalStateException("Failed to initialize GLFW");
 
         long monitor = glfwGetPrimaryMonitor();
@@ -21,9 +21,9 @@ public class Window {
 
         assert mode != null;
         glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
-        width = mode.width();
-        height = mode.height();
-        window = glfwCreateWindow(width, height, title, monitor, 0);
+        WIDTH = mode.width();
+        HEIGHT = mode.height();
+        window = glfwCreateWindow(WIDTH, HEIGHT, title, monitor, 0);
 
         glfwSetKeyCallback(window, Keyboard::keyCallback);
         Mouse.setWindow(window);
@@ -38,32 +38,32 @@ public class Window {
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        glOrtho(0, width, height, 0, -1, 1);
+        glOrtho(0, WIDTH, HEIGHT, 0, -1, 1);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
         glClearColor(0f, 0f, 0f, 1f);
-        glViewport(0, 0, width, height);
+        glViewport(0, 0, WIDTH, HEIGHT);
     }
 
-    public void update() {
+    public static void update() {
         glfwPollEvents();
         glfwSwapBuffers(window);
     }
 
-    public void clear() {
+    public static void clear() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    public boolean shouldClose() {
+    public static boolean shouldClose() {
         return glfwWindowShouldClose(window);
     }
 
-    public void requestClose() {
+    public static void requestClose() {
         glfwSetWindowShouldClose(window, true);
     }
 
-    public void destroy() {
+    public static void destroy() {
         glfwDestroyWindow(window);
         glfwTerminate();
     }

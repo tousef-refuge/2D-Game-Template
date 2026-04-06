@@ -6,16 +6,16 @@ import game.input.Mouse;
 import game.render.Texture;
 import game.scenes.core.SceneManager;
 import game.scenes.other.EmptyScene;
+import game.window.Window;
 
 import static game.core.GlobalConsts.FPS;
 
 public class Game {
-    Window window;
     final double frameTime = 1.0 / (double) FPS;
 
     @SuppressWarnings("BusyWait")
     public Game(String title) {
-        window = new Window(title);
+        Window.init(title);
 
         AudioEngine.init();
         Texture.init();
@@ -23,9 +23,9 @@ public class Game {
         SceneManager.push(new EmptyScene());
 
         double prevTime = time();
-        while (!window.shouldClose()) {
+        while (!Window.shouldClose()) {
             if (SceneManager.isEmpty()) {
-                window.requestClose();
+                Window.requestClose();
                 break;
             }
 
@@ -48,14 +48,14 @@ public class Game {
             Keyboard.update();
             Mouse.update();
 
-            window.update();
-            window.clear();
+            Window.update();
+            Window.clear();
 
             AudioEngine.update();
         }
         AudioEngine.cleanup();
         Texture.cleanupAll();
-        window.destroy();
+        Window.destroy();
     }
 
     private double time() {
