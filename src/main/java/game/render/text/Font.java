@@ -1,4 +1,4 @@
-package game.scenes.text;
+package game.render.text;
 
 import org.lwjgl.stb.STBTTBakedChar;
 
