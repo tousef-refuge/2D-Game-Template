@@ -6,10 +6,10 @@ import game.input.Keyboard;
 import game.input.Mouse;
 import game.render.Texture;
 import game.scenes.core.SceneManager;
-import game.scenes.other.EmptyScene;
 import game.window.Window;
 
 import static game.core.GlobalConsts.FPS;
+import static game.core.GlobalConsts.STARTING_SCENE;
 
 public class Game {
     final double frameTime = 1.0 / (double) FPS;
@@ -21,8 +21,7 @@ public class Game {
 
         AudioEngine.init();
         Texture.init();
-
-        SceneManager.push(new EmptyScene());
+        SceneManager.push(STARTING_SCENE);
 
         double prevTime = time();
         while (!Window.shouldClose()) {
