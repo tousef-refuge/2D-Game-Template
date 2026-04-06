@@ -27,6 +27,17 @@ public class Shape {
         glPopAttrib();
     }
 
+    public static void rectangleBordered(float cx, float cy,
+                                         float width, float height, float borderSize,
+                                         float r, float g, float b,
+                                         float rb, float gb, float bb,
+                                         String align) {
+        rectangle(cx - borderSize, cy - borderSize,
+                width + 2f * borderSize, height + 2f * borderSize,
+                rb, gb, bb, 1f, align);
+        rectangle(cx, cy, width, height, r, g, b, 1f, align);
+    }
+
     public static void circleSegment(float cx, float cy,
                                      float radius, float startDeg, float endDeg,
                                      float r, float g, float b,
@@ -63,5 +74,14 @@ public class Shape {
                                   float r, float g, float b,
                                   float a, String align) {
         circleSegment(cx, cy, radius, 0f, 360f, r, g, b, a, align);
+    }
+
+    public static void fullCircleBordered(float cx, float cy,
+                                          float radius, float borderSize,
+                                          float r, float g, float b,
+                                          float rb, float gb, float bb,
+                                          String align) {
+        fullCircle(cx, cy, radius + borderSize, rb, gb, bb, 1f, align);
+        fullCircle(cx, cy, radius, r, g, b, 1f, align);
     }
 }
