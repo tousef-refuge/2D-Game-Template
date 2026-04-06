@@ -10,7 +10,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Window {
     private static long window;
-    public static int WIDTH, HEIGHT;
+    public static int WIDTH, HEIGHT; //do NOT change these...or else...............................
 
     @SuppressWarnings("resource")
     public static void init(String title) {
@@ -18,8 +18,8 @@ public class Window {
 
         long monitor = glfwGetPrimaryMonitor();
         GLFWVidMode mode = glfwGetVideoMode(monitor);
+        if (mode == null) throw new RuntimeException("Failed to get video mode");
 
-        assert mode != null;
         glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
         WIDTH = mode.width();
         HEIGHT = mode.height();
