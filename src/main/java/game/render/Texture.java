@@ -1,6 +1,7 @@
 package game.render;
 
 import game.exceptions.AssetNotFoundException;
+import game.window.Alignment;
 
 import java.io.*;
 import java.util.HashMap;
@@ -58,24 +59,27 @@ public class Texture {
 
     public void render(float x, float y,
                        float width, float height,
-                       float alpha) {
+                       float alpha, String align) {
         glBindTexture(GL_TEXTURE_2D, id);
         glColor4f(1f, 1f, 1f, alpha);
 
+        var coords = Alignment.get(align).getCoords();
+        float nx = x + coords.x(), ny = y + coords.y();
+
         glBegin(GL_QUADS);
-        glTexCoord2f(0, 0); glVertex2f(x, y);
-        glTexCoord2f(1, 0); glVertex2f(x + width, y);
-        glTexCoord2f(1, 1); glVertex2f(x + width, y + height);
-        glTexCoord2f(0, 1); glVertex2f(x, y + height);
+        glTexCoord2f(0, 0); glVertex2f(nx, ny);
+        glTexCoord2f(1, 0); glVertex2f(nx + width, ny);
+        glTexCoord2f(1, 1); glVertex2f(nx + width, ny + height);
+        glTexCoord2f(0, 1); glVertex2f(nx, ny + height);
         glEnd();
     }
 
     public void renderCentered(float x, float y,
                                float width, float height,
-                               float alpha) {
+                               float alpha, String align) {
         float renderX = x - width / 2f;
         float renderY = y - height / 2f;
-        render(renderX, renderY, width, height, alpha);
+        render(renderX, renderY, width, height, alpha, align);
     }
 
     public static void cleanupAll() {
