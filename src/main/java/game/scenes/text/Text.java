@@ -41,6 +41,55 @@ public class Text {
         glColor4f(1f, 1f, 1f, 1f);
     }
 
+    public static void renderCentered(String text, String fontPath,
+                                      float fontSize, float borderSize,
+                                      float x, float y,
+                                      float r, float g, float b,
+                                      float rb, float gb, float bb,
+                                      float a, String align) {
+        Font font = getFont(fontPath, fontSize);
+        float width = getTextWidth(text, fontPath, fontSize);
+        float height = getTextHeight(text, fontPath, fontSize);
+
+        float drawX = x - width / 2f;
+        float drawY = y + font.ascent() - height / 2f;
+
+        render(text, fontPath, fontSize, borderSize, drawX, drawY, r, g, b, rb, gb, bb, a, align);
+    }
+
+    @SuppressWarnings("resource")
+    public static float getTextWidth(String text, String fontPath, float fontSize) {
+        Font font = getFont(fontPath, fontSize);
+
+        float maxWidth = 0f;
+        float currentWidth = 0f;
+
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (c == '\n') {
+                maxWidth = Math.max(maxWidth, currentWidth);
+                currentWidth = 0f;
+                continue;
+            }
+            if (isInvalidChar(c)) continue;
+
+            STBTTBakedChar g = font.chars().get(mapChar(c));
+            currentWidth += g.xadvance();
+        }
+        return Math.max(maxWidth, currentWidth);
+    }
+
+    public static float getTextHeight(String text, String fontPath, float fontSize) {
+        Font font = getFont(fontPath, fontSize);
+
+        int lineCount = 1;
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (c == '\n') lineCount++;
+        }
+        return font.lineHeight() * lineCount;
+    }
+
     private static Font getFont(String name, float size) {
         String key = name + '&' + size;
 
