@@ -29,6 +29,8 @@ if for some reason you plan to clone it too then:
   ```
 - Do whatever you want with the code now. Go crazy aaaahhh
 - If you plan to run the code just do ```gradle run```
+- As an alternative to all this you can just...click on "Use this template"
+  lmao I literally discovered this like 5 minutes ago
 
 ## Features
 
