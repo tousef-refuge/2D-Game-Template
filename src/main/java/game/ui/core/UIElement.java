@@ -38,11 +38,11 @@ public abstract class UIElement {
     }
 
     public float getRenderX() {
-        return Alignment.get(align).getCoords().x() + x;
+        return x + Alignment.get(align).getCoords().x();
     }
 
     public float getRenderY() {
-        return Alignment.get(align).getCoords().y() + y;
+        return y + Alignment.get(align).getCoords().y();
     }
 
     public float getX() {
@@ -69,7 +69,25 @@ public abstract class UIElement {
         this.y = y;
     }
 
+    public void setPos(UIElement other) {
+        this.x = other.x;
+        this.y = other.y;
+    }
+
     public void setActive(boolean active) {
         this.isActive = active;
+    }
+
+    public void setXCentered(float x) {
+        this.x = x - 0.5f * width;
+    }
+
+    public void setYCentered(float y) {
+        this.y = y - 0.5f * height;
+    }
+
+    public void setPosCentered(UIElement other) {
+        this.x = other.x + 0.5f * other.width;
+        this.y = other.y + 0.5f * other.height;
     }
 }
