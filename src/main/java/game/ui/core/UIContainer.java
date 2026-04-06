@@ -63,4 +63,26 @@ public class UIContainer extends UIElement {
         if (texture != null) super.render();
         for (UIElement child : children) child.render();
     }
+
+    @Override
+    public void setX(float x) {
+        float dx = this.x - x;
+        this.x = x;
+        for (UIElement child : children) child.setX(child.getX() - dx);
+    }
+
+    @Override
+    public void setY(float y) {
+        float dy = this.y - y;
+        this.y = y;
+        for (UIElement child : children) child.setY(child.getY() - dy);
+    }
+
+    @Override
+    public void setPos(UIElement other) {
+        setX(other.getX());
+        setY(other.getY());
+    }
+
+    //i do not feel like implementing centered moving thats a story for another day lmao
 }
