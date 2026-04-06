@@ -35,6 +35,7 @@ dependencies {
     implementation "org.lwjgl:lwjgl-stb::$lwjglNatives"
 
     implementation 'com.google.code.gson:gson:2.11.0'
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
 }
 
 def ManifestTask(String taskName, String subStart, String subOutput, List<String> exts) {
