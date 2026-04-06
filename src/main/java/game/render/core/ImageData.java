@@ -1,4 +1,4 @@
-package game.render;
+package game.render.core;
 
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.system.MemoryStack;

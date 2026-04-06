@@ -1,4 +1,4 @@
-package game.render;
+package game.render.core;
 
 import game.exceptions.AssetNotFoundException;
 import game.window.Alignment;
