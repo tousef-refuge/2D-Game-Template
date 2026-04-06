@@ -1,6 +1,7 @@
 package game.core;
 
 import game.audio.AudioEngine;
+import game.data.PlayerData;
 import game.input.Keyboard;
 import game.input.Mouse;
 import game.render.Texture;
@@ -15,6 +16,7 @@ public class Game {
 
     @SuppressWarnings("BusyWait")
     public Game(String title) {
+        PlayerData.init();
         Window.init(title);
 
         AudioEngine.init();

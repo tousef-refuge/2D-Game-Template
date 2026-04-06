@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@SuppressWarnings("unused")
 public class PlayerData {
     private static JsonObject data = new JsonObject();
     private static final Gson gson = new Gson();
