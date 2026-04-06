@@ -1,10 +1,12 @@
 package game.core;
 
 import game.audio.AudioEngine;
+import game.data.Env;
 import game.data.PlayerData;
 import game.input.Keyboard;
 import game.input.Mouse;
 import game.render.core.Texture;
+import game.scenes.core.SceneFactory;
 import game.scenes.core.SceneManager;
 import game.window.Window;
 
@@ -22,6 +24,12 @@ public class Game {
         AudioEngine.init();
         Texture.init();
         SceneManager.push(STARTING_SCENE);
+
+        if (Env.get("DEBUG", "false").equals("true")) {
+            String name = Env.get("SCENE_NAME");
+            String args = Env.get("SCENE_ARGS");
+            SceneManager.push(SceneFactory.createScene(name, args));
+        }
 
         double prevTime = time();
         while (!Window.shouldClose()) {
