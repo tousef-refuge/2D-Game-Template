@@ -1,6 +1,6 @@
 package game.core;
 
-import game.scenes.core.Scene;
+import game.scenes.base.Scene;
 import game.scenes.other.EmptyScene;
 
 public final class GlobalConsts {

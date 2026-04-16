@@ -1,6 +1,6 @@
 package game.scenes.other;
 
-import game.scenes.core.Scene;
+import game.scenes.base.Scene;
 
 public class EmptyScene extends Scene {
     @Override

@@ -1,4 +1,6 @@
-package game.scenes.core;
+package game.scenes.base;
+
+import game.scenes.core.SceneState;
 
 import java.util.ArrayDeque;
 

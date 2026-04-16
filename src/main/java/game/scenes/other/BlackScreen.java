@@ -1,4 +1,7 @@
-package game.scenes.core;
+package game.scenes.other;
+
+import game.scenes.base.Scene;
+import game.scenes.core.SceneManager;
 
 public class BlackScreen extends Scene {
     double timePassed, resetTime;

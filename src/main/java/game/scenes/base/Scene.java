@@ -1,4 +1,4 @@
-package game.scenes.core;
+package game.scenes.base;
 
 @SuppressWarnings("SameParameterValue")
 public abstract class Scene {

@@ -1,6 +1,7 @@
 package game.scenes.core;
 
 import game.exceptions.AssetNotFoundException;
+import game.scenes.base.Scene;
 import game.scenes.other.EmptyScene;
 
 public class SceneFactory {

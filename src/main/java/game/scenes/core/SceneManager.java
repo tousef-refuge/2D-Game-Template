@@ -1,5 +1,7 @@
 package game.scenes.core;
 
+import game.scenes.base.Scene;
+
 import java.util.ArrayDeque;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
