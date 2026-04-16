@@ -10,16 +10,15 @@ import game.scenes.core.SceneFactory;
 import game.scenes.core.SceneManager;
 import game.window.Window;
 
-import static game.core.GlobalConsts.FPS;
-import static game.core.GlobalConsts.STARTING_SCENE;
+import static game.core.GlobalConsts.*;
 
 public class Game {
     final double frameTime = 1.0 / (double) FPS;
 
     @SuppressWarnings("BusyWait")
-    public Game(String title) {
+    public Game() {
         PlayerData.init();
-        Window.init(title);
+        Window.init(TITLE);
 
         AudioEngine.init();
         Texture.init();
