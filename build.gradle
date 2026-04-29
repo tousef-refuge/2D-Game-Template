@@ -6,7 +6,7 @@ plugins {
 }
 
 application {
-    mainClass = 'game.Main'
+    mainClass = 'Main'
 }
 
 ext.lwjglVersion = "3.3.6"
@@ -91,7 +91,7 @@ tasks.named("processResources") {
 tasks.jar {
     manifest {
         attributes(
-                'Main-Class': 'game.Main'
+                'Main-Class': 'Main'
         )
     }
 
