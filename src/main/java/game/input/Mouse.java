@@ -10,7 +10,8 @@ public class Mouse {
     private final static boolean[] buttons = new boolean[GLFW_MOUSE_BUTTON_LAST];
     private final static boolean[] prevButtons = new boolean[GLFW_MOUSE_BUTTON_LAST];
 
-    private static double x, y;
+    private static double x = 0, y = 0;
+    private static double dx, dy;
     public static long window;
 
     @SuppressWarnings({"unused", "resource"})
@@ -29,9 +30,23 @@ public class Mouse {
             DoubleBuffer yPos = stack.mallocDouble(1);
 
             glfwGetCursorPos(window, xPos, yPos);
-            x = xPos.get(0);
-            y = yPos.get(0);
+            double newX = xPos.get(0);
+            double newY = yPos.get(0);
+
+            dx = newX - x;
+            dy = newY - y;
+            x = newX;
+            y = newY;
         }
+    }
+
+    public static void setCursorVisibility(boolean visible) {
+        if (window == 0) return;
+        glfwSetInputMode(
+                window,
+                GLFW_CURSOR,
+                visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED
+        );
     }
 
     public static boolean isPressed(int button) {
@@ -52,5 +67,13 @@ public class Mouse {
 
     public static double getY() {
         return y;
+    }
+
+    public static double getDx() {
+        return dx;
+    }
+
+    public static double getDy() {
+        return dy;
     }
 }
