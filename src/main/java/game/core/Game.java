@@ -24,7 +24,7 @@ public class Game {
         Texture.init();
         SceneManager.push(STARTING_SCENE);
 
-        if (Env.get("DEBUG", "false").equals("true")) {
+        if (Env.get("CHOOSE_SCENE", "false").equals("true")) {
             String name = Env.get("SCENE_NAME");
             String args = Env.get("SCENE_ARGS");
             SceneManager.push(SceneFactory.createScene(name, args));
