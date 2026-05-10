@@ -10,34 +10,31 @@ public class Mouse {
     private final static boolean[] buttons = new boolean[GLFW_MOUSE_BUTTON_LAST];
     private final static boolean[] prevButtons = new boolean[GLFW_MOUSE_BUTTON_LAST];
 
-    private static double x = 0, y = 0;
-    private static double dx, dy;
+    private static double x, y, dx, dy;
     public static long window;
 
     @SuppressWarnings({"unused", "resource"})
     public static void setWindow(long win) {
         window = win;
-        glfwSetMouseButtonCallback(window, (winHandle, button, action, mods) -> {
-            if (button < buttons.length) buttons[button] = action != GLFW_RELEASE;
+
+        glfwSetMouseButtonCallback(window, (w, button, action, mods) -> {
+            if (button < buttons.length) {
+                buttons[button] = action != GLFW_RELEASE;
+            }
+        });
+
+        glfwSetCursorPosCallback(window, (w, xpos, ypos) -> {
+            dx += xpos - x;
+            dy += ypos - y;
+            x = xpos;
+            y = ypos;
         });
     }
 
     public static void update() {
         System.arraycopy(buttons, 0, prevButtons, 0, buttons.length);
-
-        try (MemoryStack stack = MemoryStack.stackPush()) {
-            DoubleBuffer xPos = stack.mallocDouble(1);
-            DoubleBuffer yPos = stack.mallocDouble(1);
-
-            glfwGetCursorPos(window, xPos, yPos);
-            double newX = xPos.get(0);
-            double newY = yPos.get(0);
-
-            dx = newX - x;
-            dy = newY - y;
-            x = newX;
-            y = newY;
-        }
+        dx = 0;
+        dy = 0;
     }
 
     public static void setCursorVisibility(boolean visible) {
@@ -47,6 +44,16 @@ public class Mouse {
                 GLFW_CURSOR,
                 visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED
         );
+
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            DoubleBuffer xPos = stack.mallocDouble(1);
+            DoubleBuffer yPos = stack.mallocDouble(1);
+            glfwGetCursorPos(window, xPos, yPos);
+            x = xPos.get(0);
+            y = yPos.get(0);
+            dx = 0;
+            dy = 0;
+        }
     }
 
     public static boolean isPressed(int button) {
