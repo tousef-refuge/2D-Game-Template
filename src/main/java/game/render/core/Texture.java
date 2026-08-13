@@ -47,13 +47,13 @@ public class Texture {
     }
 
     public static Texture get(String img) {
-        String path = "textures/" + img + ".png";
+        String path = "textures/" + img;
         if (textures.get(path) == null) throw new AssetNotFoundException("texture", path);
         return textures.get(path);
     }
 
     public static boolean exists(String img) {
-        String path = "textures/" + img + ".png";
+        String path = "textures/" + img;
         return textures.containsKey(path);
     }
 

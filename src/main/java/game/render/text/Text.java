@@ -96,7 +96,7 @@ public class Text {
         Font entry = fontCache.get(key);
         if (entry != null) return entry;
 
-        String path = "fonts/" + name + ".ttf";
+        String path = "fonts/" + name;
         try {
             ByteBuffer buffer = loadInternalResource(path);
             entry = bakeFont(buffer, size);
