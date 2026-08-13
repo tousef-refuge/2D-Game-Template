@@ -12,8 +12,8 @@ import java.nio.charset.StandardCharsets;
 public class JsonData {
     JsonObject data;
 
-    public JsonData(String id) {
-        String path = "jsons/" + id + ".json";
+    public JsonData(String name) {
+        String path = "jsons/" + name;
         final Gson gson = new Gson();
         try (InputStream in = getClass().getClassLoader().getResourceAsStream(path)) {
             if (in == null) throw new AssetNotFoundException("json", path);
