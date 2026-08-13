@@ -37,13 +37,21 @@ public class Game {
                 break;
             }
 
+            Window.pollEvents();
             double startTime = time();
             double currentTime = time();
             double dt = currentTime - prevTime;
             prevTime = currentTime;
 
+            Keyboard.update();
+            Mouse.update();
+
+            Window.clear();
             SceneManager.update(dt);
             SceneManager.render();
+
+            Window.swapBuffers();
+            AudioEngine.update();
 
             double endTime = time();
             double elapsed = endTime - startTime;
@@ -52,15 +60,6 @@ public class Game {
                     Thread.sleep((long)((frameTime - elapsed) * 1000.0));
                 } catch (InterruptedException ignored) {}
             }
-
-            Keyboard.update();
-            Mouse.update();
-
-            Window.pollEvents();
-            Window.swapBuffers();
-            Window.clear();
-
-            AudioEngine.update();
         }
         AudioEngine.cleanup();
         Texture.cleanupAll();
