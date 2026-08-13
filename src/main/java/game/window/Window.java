@@ -46,8 +46,11 @@ public class Window {
         glViewport(0, 0, WIDTH, HEIGHT);
     }
 
-    public static void update() {
+    public static void pollEvents() {
         glfwPollEvents();
+    }
+
+    public static void swapBuffers() {
         glfwSwapBuffers(window);
     }
 

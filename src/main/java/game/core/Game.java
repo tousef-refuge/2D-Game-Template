@@ -56,7 +56,8 @@ public class Game {
             Keyboard.update();
             Mouse.update();
 
-            Window.update();
+            Window.pollEvents();
+            Window.swapBuffers();
             Window.clear();
 
             AudioEngine.update();
