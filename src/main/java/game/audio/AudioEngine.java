@@ -38,8 +38,9 @@ public class AudioEngine {
         } catch (IOException ignored) {}
     }
 
-    public static void playSoundEffect(String SoundEffect) {
-        String path = "audio/sfx/" + SoundEffect + ".wav";
+    public static void playSoundEffect(String soundEffect) {
+        // preferably wav
+        String path = "audio/sfx/" + soundEffect;
         SoundEffect currentSoundEffect = SoundEffectCache.get(path);
         if (currentSoundEffect == null) throw new AssetNotFoundException("sound", path);
 
@@ -47,7 +48,8 @@ public class AudioEngine {
     }
 
     public static void playMusic(String music) {
-        String path = "audio/music/" + music + ".ogg";
+        // preferably ogg
+        String path = "audio/music/" + music;
         if (currentMusic != null) currentMusic.cleanup();
         currentMusic = new Music(path);
         setMusicVolume(PlayerData.getFloat("musicVolume"));
