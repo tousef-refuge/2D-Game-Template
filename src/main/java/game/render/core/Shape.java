@@ -1,4 +1,4 @@
-package game.render.shape;
+package game.render.core;
 
 import game.window.Alignment;
 
